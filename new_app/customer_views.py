@@ -77,8 +77,13 @@ def customer_details(request,id):
         if form.is_valid():
             obj=form.save(commit=False)
             obj.cart = data
-            obj.save()
-            return redirect('customer_payment',id = obj.id)
+            print(obj.quantity)
+            print(data.product.quantity)
+            if obj.quantity <= data.product.quantity:
+                obj.save()
+                return redirect('customer_payment', id=obj.id)
+            else:
+                messages.info(request,'selected quantity is greater than available quantity')
     return render(request,'customer/customer_details.html',{'customer_details':form})
 
 
@@ -128,6 +133,9 @@ def cancel_order(request,id):
     product.save()
     data.delete()
     return redirect('customer_orders')
+
+
+
 
 
 

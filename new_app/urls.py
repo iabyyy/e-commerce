@@ -27,7 +27,7 @@ urlpatterns = [
     path('customer_orders',customer_views.customer_orders,name='customer_orders'),
     path('cancel_order<int:id>/',customer_views.cancel_order,name='cancel_order'),
     path('seller_orders',seller_views.seller_orders,name='seller_orders'),
-    path('admin_orders',admin_views.admin_orders,name='admin_orders')
+    path('admin_orders',admin_views.admin_orders,name='admin_orders'),
 ]
 
 
