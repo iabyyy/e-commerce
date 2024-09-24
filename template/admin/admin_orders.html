@@ -1,0 +1,56 @@
+{% extends "admin/adminpage.html" %}
+{% block content %}
+
+
+<!-- {% for message in messages %}-->
+<!--<div class="alert alert-primary" role="alert">-->
+<!--    {{message}}-->
+<!--</div>-->
+
+
+
+<!--        {% endfor %}-->
+
+
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">SL NO</th>
+<!--        <th scope="col"> SELLER NAME</th>-->
+        <th scope="col"> SELLER ID</th>
+      <th scope="col"> CUSTOMER NAME</th>
+        <th scope="col">ADDRESS</th>
+        <th scope="col">PHONE NO</th>
+        <th scope="col">PRODUCT NAME</th>
+      <th scope="col">IMAGE</th>
+      <th scope="col">QUANTITY</th>
+        <th scope="col">AMOUNT PAID</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in admin_orders %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+<!--        <td class="fw-bold">{{i.details.cart.product.seller}}</td>-->
+        <td class="fw-bold text-uppercase ">{{i.details.cart.product.seller.seller_id}}</td>
+      <td class="fw-bold text-uppercase ">{{i.details.cart.User.name}}</td>
+        <td class="fw-bold text-uppercase ">{{i.details.address}}</td>
+        <td class="fw-bold text-uppercase ">{{i.details.cart.User.contact}}</td>
+        <td class="fw-bold text-uppercase ">{{i.details.cart.product}}</td>
+<!--        <td class="fw-bold"></td>-->
+      <td>
+          <img src="{{ i.details.cart.product.photo.url }}" height="300px" width="100px">
+      </td>
+      <td class="fw-bold">{{i.details.quantity}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+
+</table>
+
+
+
+
+{% endblock %}
+

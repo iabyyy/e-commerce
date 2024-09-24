@@ -1,0 +1,16 @@
+{% extends "customer/customerpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<form method="post">
+    {% csrf_token %}
+    {{customer_details | crispy}}
+    {{total_price | crispy }}
+     <button type="submit" class="btn btn-primary">Submit</button>
+
+</form>
+
+
+
+
+{% endblock %}

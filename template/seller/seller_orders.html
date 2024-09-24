@@ -1,0 +1,50 @@
+{% extends "seller/sellerpage.html" %}
+{% block content %}
+
+
+<!-- {% for message in messages %}-->
+<!--<div class="alert alert-primary" role="alert">-->
+<!--    {{message}}-->
+<!--</div>-->
+
+
+
+<!--        {% endfor %}-->
+
+
+    <table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">SL NO</th>
+      <th scope="col"> CUSTOMER NAME</th>
+        <th scope="col">ADDRESS</th>
+        <th scope="col">PHONE NO</th>
+        <th scope="col">PRODUCT NAME</th>
+      <th scope="col">IMAGE</th>
+      <th scope="col">QUANTITY</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in seller_orders %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td class="fw-bold text-uppercase ">{{i.details.name}}</td>
+        <td class="fw-bold text-uppercase ">{{i.details.address}}</td>
+        <td class="fw-bold text-uppercase ">{{i.details.phone_no}}</td>
+        <td class="fw-bold text-uppercase ">{{i.details.cart.product}}</td>
+      <td>
+          <img src="{{ i.details.cart.product.photo.url }}" height="300px" width="100px">
+      </td>
+      <td class="fw-bold">{{i.details.quantity}}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+
+
+</table>
+
+
+
+
+{% endblock %}
+

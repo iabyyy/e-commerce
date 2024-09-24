@@ -1,0 +1,14 @@
+{% extends "seller/sellerpage.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="mt-4 ms-5 me-5">
+    {% csrf_token %}
+
+    {{product_update | crispy}}
+
+    <button type="submit" class="btn btn-success">SUBMIT</button>
+
+</form>
+
+
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends "customer/customerpage.html" %}
+{% block content %}
+
+
+ {% for message in messages %}
+<div class="alert alert-primary" role="alert">
+    {{message}}
+</div>
+
+
+
+        {% endfor %}
+
+
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">SL NO</th>
+      <th scope="col">NAME</th>
+      <th scope="col">IMAGE</th>
+       <th scope="col">PRICE</th>
+        <th scope="col">REMOVE</th>
+        <th scope="col">PLACE ORDER</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for i in customer_cart %}
+    <tr>
+      <th scope="row">{{forloop.counter}}</th>
+      <td class="fw-bold">{{i.product.name}}</td>
+      <td>
+          <img src="{{ i.product.photo.url }}" height="300px" width="100px">
+      </td>
+        <td class="fw-bold">${{i.product.price}}</td>
+        <td><a class="btn btn-danger fw-bold" href="{% url 'remove_from_cart' i.id %}">REMOVE</a></td>
+        {% if i.product.quantity == 0 %}
+        <td><h4 class="fw-bold text-uppercase">out of stock </h4></td>
+        {% else %}
+         <td><a class="btn btn-warning fw-bold " href="{% url 'customer_details' i.id %}">PLACE ORDER</a></td>
+        {% endif %}
+
+    </tr>
+    {% endfor %}
+  </tbody>
+
+
+</table>
+
+
+
+
+{% endblock %}
+
