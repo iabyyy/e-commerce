@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from new_app.customer_views import customer_reg
@@ -18,16 +19,17 @@ def seller_reg(request):
             user2 = form2.save(commit=False)
             user2.User = user1
             user2.save()
-            return redirect('login')
+            return redirect('userlogin')
     return render(request,'seller/seller_reg.html',{'form1':form1,'form2':form2})
 
 
-
+@login_required(login_url='userlogin')
 def seller_profile(request):
     u=request.user
     data = Seller.objects.filter(User=u)
 
 
+@login_required(login_url='userlogin')
 def add_product(request ):
     u = request.user
     data = Seller.objects.get(User=u)
@@ -42,7 +44,7 @@ def add_product(request ):
     return render(request,'seller/productpage.html',{'product':form})
 
 
-
+@login_required(login_url='userlogin')
 def product_view(request):
     u = request.user
     data = Seller.objects.get(User=u)
@@ -51,13 +53,14 @@ def product_view(request):
     print(form)
     return render(request,'seller/product_view.html',{'product_view':form})
 
-
+@login_required(login_url='userlogin')
 def product_delete(request,id):
     data = Products.objects.get(id=id)
     data.delete()
     return redirect('product_view')
 
 
+@login_required(login_url='userlogin')
 def product_update(request,id):
     data = Products.objects.get(id=id)
     form = ProductForm(instance=data)
@@ -69,6 +72,7 @@ def product_update(request,id):
     return render(request,'seller/product_update.html',{'product_update':form})
 
 
+@login_required(login_url='userlogin')
 def seller_orders(request):
     data = Payment.objects.all()
     return render(request,'seller/seller_orders.html',{'seller_orders':data})

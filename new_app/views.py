@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 
@@ -29,14 +30,16 @@ def profilelogin(request):
             messages.info(request,'invalid credentials')
     return render(request,'login.html')
 
-
+@login_required(login_url='userlogin')
 def adminpage(request):
     return render(request,'admin/adminpage.html')
 
-
+@login_required(login_url='userlogin')
 def sellerpage(request):
     return render(request,'seller/sellerpage.html')
 
+
+@login_required(login_url='userlogin')
 def customerpage(request):
     return render(request,'customer/customerpage.html')
 

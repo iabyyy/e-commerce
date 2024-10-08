@@ -1,6 +1,7 @@
 from itertools import product
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 
 from new_app.forms import LoginForm, CustomerForm, ProductForm, CartItemForm, PaymentForm, DetailsForm
@@ -23,20 +24,21 @@ def customer_reg(request):
             return redirect('login')
     return render(request,'customer/customer_reg.html',{'form1':form1,'form2':form2})
 
-
+@login_required(login_url='userlogin')
 def customer_profile(request):
     u=request.user
     print(u)
     data = Customer.objects.filter(User=u)
     print(data)
 
+@login_required(login_url='userlogin')
 def cust_product_view(request):
     data = Products.objects.all()
     return render(request,'customer/cust_product_view.html',{'cust_product_view':data})
 
 
 
-
+@login_required(login_url='userlogin')
 def add_to_cart(request,id):
     user = Customer.objects.get(User=request.user)
     print(user)
@@ -57,17 +59,18 @@ def add_to_cart(request,id):
 
 
 
-
+@login_required(login_url='userlogin')
 def view_cart(request):
     data = CartItem.objects.all()
     return render(request,'customer/cart.html',{'customer_cart':data})
 
+@login_required(login_url='userlogin')
 def remove_from_cart(request,id):
     cart_item = CartItem.objects.get(id=id)
     cart_item.delete()
     return redirect('view_cart')
 
-
+@login_required(login_url='userlogin')
 def customer_details(request,id):
     data = CartItem.objects.get(id=id)
     print(data)
@@ -86,7 +89,7 @@ def customer_details(request,id):
                 messages.info(request,'selected quantity is greater than available quantity')
     return render(request,'customer/customer_details.html',{'customer_details':form})
 
-
+@login_required(login_url='userlogin')
 def customer_payment(request,id):
     details = Details.objects.get(id=id)
     product =  details.cart.product
@@ -113,12 +116,13 @@ def customer_payment(request,id):
     return render(request,'customer/payment.html',{'customer_payment':form,'total_price':total_price})
 
 
-
+@login_required(login_url='userlogin')
 def customer_orders(request):
     data = Payment.objects.all()
     return render(request,'customer/customer_orders.html',{'customer_orders':data})
 
 
+@login_required(login_url='userlogin')
 def cancel_order(request,id):
     data = Payment.objects.get(id=id)
     print(data)

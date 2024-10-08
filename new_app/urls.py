@@ -4,15 +4,13 @@ from new_app import views, customer_views, seller_views, admin_views
 
 urlpatterns = [
     path('',views.homepage,name='home'),
-    # path('userpage',views.userpage,name='userpage'),
-    path('login',views.profilelogin,name='login'),
+    path('userlogin',views.profilelogin,name='userlogin'),
     path('customer_reg',customer_views.customer_reg,name='customer_reg'),
     path('adminpage',views.adminpage,name='adminpage'),
     path('sellerpage',views.sellerpage,name='sellerpage'),
     path('customerpage',views.customerpage,name='customerpage'),
     path('seller_reg',seller_views.seller_reg,name='seller_reg'),
     path('seller_list',admin_views.seller_list,name='seller_list'),
-    path('seller_delete<int:id>/',admin_views.seller_delete,name='seller_delete'),
     path('add_products',seller_views.add_product,name='add_products'),
     path('product_view',seller_views.product_view,name='product_view'),
     path('product_delete<int:id>/',seller_views.product_delete,name='product_delete'),
